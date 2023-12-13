@@ -3,10 +3,10 @@ package main
 import (
 	"curd_gin/database"
 	"curd_gin/models"
+	"curd_gin/router"
 	"fmt"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	// "net/http"
+	// "github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -21,11 +21,7 @@ func main() {
 		fmt.Println("Error during migration:", err)
 		return
 	}
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r := router.SetupRouter()
+	r.Run()
+	
 }
